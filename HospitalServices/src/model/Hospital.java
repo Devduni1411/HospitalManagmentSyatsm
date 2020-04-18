@@ -78,15 +78,17 @@ public String updateHospital(String ID, String no, String name, String address, 
 			return "Error while connecting to the database for updating.";
 		}
 		// create a prepared statement
-		String query = "UPDATE hospitals SET hospitalNo=?,hospitalName=?,hospitalAddress =?,hospitalPhone=?,hospitalPassword=? WHERE itemID=?";
+		String query = "UPDATE hospital SET hospitalNo=?,hospitalName=?,hospitalAddress=?,hospitalPhone=?,hospitalEmail=?,hospitalPassword=? WHERE hospitalID=?";
 		PreparedStatement preparedStmt = con.prepareStatement(query);
 		
 		// binding values
 		preparedStmt.setString(1, no);
-		preparedStmt.setString(2,name);
-		preparedStmt.setString(3,address);
-		preparedStmt.setString(4,phone);
-		preparedStmt.setString(5,password);
+		preparedStmt.setString(2, name);
+		preparedStmt.setString(3, address);
+		preparedStmt.setString(4, phone);
+		preparedStmt.setString(5, email);
+		preparedStmt.setString(6, password);
+		preparedStmt.setInt(7, Integer.parseInt(ID));
 		
 		
 		//execute the statement
@@ -103,7 +105,6 @@ public String updateHospital(String ID, String no, String name, String address, 
 	}
 	return output;
 }
-
 public String readHospitals()
 	{
 		String output = "";
@@ -148,10 +149,10 @@ public String readHospitals()
 				  
 				  // buttons
 				  output += "<td><input name=\"btnUpdate\" "
-				  + " type=\"button\" value=\"Update\"></td>"  
+				  + " type=\"button\" value=\"Update\" class=\"btn btn-danger\"></td>"  
 						  + "<td><form method=\"post\" action=\"hospitals.jsp\">"
 				  + "<input name=\"btnRemove\" " 
-						  + " type=\"submit\" value=\"Remove\">"
+						  + " type=\"submit\" value=\"Remove\" class=btn btn-danger\">"
 				  + "<input name=\"hospitalID\" type=\"hidden\" "    
 						  + " value=\"" + hospitalID + "\">" + "</form></td></tr>";   
 				  }

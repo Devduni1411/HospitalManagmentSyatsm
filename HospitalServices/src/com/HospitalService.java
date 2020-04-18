@@ -51,7 +51,7 @@ public class HospitalService {
 		JsonObject hospitalObject = new JsonParser().parse(itemData).getAsJsonObject();
 		
 		// Read the values from the JSON object 
-		String hospitalID = hospitalObject.get("hospitalID ").getAsString(); 
+		String hospitalID = hospitalObject.get("hospitalID").getAsString(); 
 		String hospitalNo = hospitalObject.get("hospitalNo").getAsString();
 		String hospitalName = hospitalObject.get("hospitalName").getAsString();
 		String hospitalAddress = hospitalObject.get("hospitalAddress").getAsString();
@@ -59,7 +59,7 @@ public class HospitalService {
 		String hospitalEmail = hospitalObject.get("hospitalEmail").getAsString();
 		String hospitalPassword =hospitalObject.get("hospitalPassword").getAsString();
 		
-		String output = hospitalObj.updateHospital(hospitalID, hospitalNo, hospitalName, hospitalAddress, hospitalPhone, hospitalEmail, hospitalPassword);
+		String output = hospitalObj.updateHospital(hospitalID, hospitalNo, hospitalName, hospitalAddress,hospitalPhone, hospitalEmail, hospitalPassword);
 		return output;
 	}
 
@@ -74,7 +74,7 @@ public class HospitalService {
 		//Convert the input string to an XML document
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());
 		
-		//Read the value from the element <itemID>
+		//Read the value from the element <hospitalID>
 		String hospitalID = doc.select("hospitalID").text();  
 		
 		 String output = hospitalObj.deleteHospital(hospitalID);  
