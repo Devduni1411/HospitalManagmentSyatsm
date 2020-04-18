@@ -26,7 +26,7 @@ public class Doctor {
 	
 	}
 	
-	public String insertDoctor(String name, String address, String email,String phone,String specialization)
+	public String insertDoctor(String name, String address, String email,String phone,String specialization,String hospitalID)
 	{
 		
 	String output = "";
@@ -39,8 +39,8 @@ public class Doctor {
 	return "Error while connecting to the database";
 	}
 	// create a prepared statement
-	String query = " insert into doctors (`dID`,`dName`,`address`,`email`,`phoneNo`,`specialization`)"
-	+ " values (?, ?, ?, ?, ?, ?)";
+	String query = " insert into doctors (`dID`,`dName`,`address`,`email`,`phoneNo`,`specialization`,`hospitalID`)"
+	+ " values (?, ?, ?, ?, ?, ?, ?)";
 	java.sql.PreparedStatement preparedStmt = con.prepareStatement(query);
 	// binding values
 	preparedStmt.setInt(1, 0);
@@ -49,6 +49,7 @@ public class Doctor {
 	preparedStmt.setString(4, email);
 	preparedStmt.setInt(5, Integer.parseInt(phone) );
 	preparedStmt.setString(6, specialization);
+	preparedStmt.setInt(7, Integer.parseInt(hospitalID) );
 	//execute the statement
 	preparedStmt.execute();
 	con.close();
@@ -75,11 +76,15 @@ public class Doctor {
 	// Prepare the html table to be displayed
 	output = "<table border=\"1\"><tr><th>Doctor Name</th>"
 	+"<th>Address</th><th>E-mail</th>"
-	+ "<th>Phone_No</th><th>Specialization</th>"
+	+ "<th>Phone_No</th><th>Specialization</th><th>Hospital</th>"
 	+ "<th>Update</th><th>Remove</th></tr>";
 	String query = "select * from doctors";
+   
+
 	java.sql.Statement stmt = con.createStatement();
 	ResultSet rs = stmt.executeQuery(query);
+	
+	
 	// iterate through the rows in the result set
 	while (rs.next())
 	{
@@ -89,12 +94,16 @@ public class Doctor {
 	String email = rs.getString("email");
 	String phoneNo = Integer.toString(rs.getInt("phoneNO"));
 	String specialization = rs.getString("specialization");
+	String hospitalID = Integer.toString(rs.getInt("hospitalID"));
+	hospitalID="select hospitalName from hospital"; 
+	ResultSet rm = stmt.executeQuery(hospitalID);
 	// Add into the html table
 	output += "<tr><td>" + dName + "</td>";
 	output += "<td>" + address + "</td>";
 	output += "<td>" + email + "</td>";
 	output += "<td>" + phoneNo + "</td>";
 	output += "<td>" + specialization + "</td>";
+	output += "<td>" + hospitalID + "</td>";
 	// buttons
 	output += "<td><input name=\"btnUpdate\" "
 	+ " type=\"button\" value=\"Update\"></td>"
@@ -153,10 +162,13 @@ public class Doctor {
 	{
 	Connection con = connect();
 	if (con == null)
-	{return "Error while connecting to the database for updating."; }
+	{
+		return "Error while connecting to the database for updating."; }
+	
 	// create a prepared statement
 	String query = "UPDATE doctors SET dName=?,address=?,email=?,phoneNo=?,specialization=? WHERE dID=?";
 	PreparedStatement preparedStmt = con.prepareStatement(query);
+	
 	// binding values
 	preparedStmt.setString(1, name);
 	preparedStmt.setString(2, address);
@@ -164,15 +176,20 @@ public class Doctor {
 	preparedStmt.setInt(4, Integer.parseInt(phoneNo));
 	preparedStmt.setString(5, specialization);
 	preparedStmt.setInt(6, Integer.parseInt(ID));
+	
 	// execute the statement
 	preparedStmt.execute();
 	con.close();
 	output = "Updated successfully";
 	}
+	
 	catch (Exception e)
+	
 	{
-	output = "Error while updating the item.";
-	System.err.println(e.getMessage());
+	
+		output = "Error while updating the item.";
+	
+		System.err.println(e.getMessage());
 	}
 	return output;
 	}
