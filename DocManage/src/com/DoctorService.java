@@ -52,16 +52,22 @@ public class DoctorService {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String updateDoctor(String itemData)
 	{
-	//Convert the input string to a JSON object
-	JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
+	
+		//Convert the input string to a JSON object
+	
+		JsonObject itemObject = new JsonParser().parse(itemData).getAsJsonObject();
+	
 	//Read the values from the JSON object
+	
 	String dID = itemObject.get("dID").getAsString();
 	String dName = itemObject.get("dName").getAsString();
 	String address = itemObject.get("address").getAsString();
 	String email = itemObject.get("email").getAsString();
 	String phoneNo = itemObject.get("phoneNo").getAsString();
 	String specialization = itemObject.get("specialization").getAsString();
+	
 	String output = docObj.updateDoctor(dID, dName, address, email, phoneNo, specialization);
+	
 	return output;
 	}
 	
