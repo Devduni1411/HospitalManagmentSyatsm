@@ -195,7 +195,7 @@ public class Payment {
 				
 				output += "<td><input name=\"btnUpdate\" "
 						 + " type=\"button\" value=\"Update\" class=\"btn btn-danger\"></td>"
-						 + "<td><form method=\"post\" action=\"patient.jsp\">"
+						 + "<td><form method=\"post\" action=\"payment.jsp\">"
 						 + "<input name=\"btnRemove\" "
 						 + " type=\"submit\" value=\"Remove\" class=\"btn btn-danger\">"
 						 + "<input name=\"pid\" type=\"hidden\" "
