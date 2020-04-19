@@ -41,7 +41,7 @@ public class DoctorService {
 	@FormParam("email") String email,
 	@FormParam("phoneNo") String phoneNo,
 	@FormParam("specialization") String specialization)
-	
+
 	{
 	String output = docObj.insertDoctor(dName, address, email, phoneNo, specialization);
 	return output;
