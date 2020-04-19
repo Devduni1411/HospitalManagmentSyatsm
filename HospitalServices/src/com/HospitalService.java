@@ -1,7 +1,5 @@
 package com;
 
-import model.Hospital;
-
 //For REST Service
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -9,19 +7,16 @@ import javax.ws.rs.core.MediaType;
 //For JSON
 import com.google.gson.*;
 
-
+import model.Hospital;
 
 //For XML 
 import org.jsoup.*;
 import org.jsoup.parser.*;
 import org.jsoup.nodes.Document;
 
-
-
 @Path("/Hospitals")
 public class HospitalService {
 
-	
 	Hospital hospitalObj = new Hospital(); 
 
 	@GET
@@ -46,7 +41,7 @@ public class HospitalService {
 			return output;
 	} 
 
-    @PUT
+@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
@@ -64,7 +59,7 @@ public class HospitalService {
 		String hospitalEmail = hospitalObject.get("hospitalEmail").getAsString();
 		String hospitalPassword =hospitalObject.get("hospitalPassword").getAsString();
 		
-		String output = hospitalObj.updateHospital(hospitalID, hospitalNo, hospitalName, hospitalAddress, hospitalPhone, hospitalEmail, hospitalPassword);
+		String output = hospitalObj.updateHospital(hospitalID, hospitalNo, hospitalName, hospitalAddress,hospitalPhone, hospitalEmail, hospitalPassword);
 		return output;
 	}
 
@@ -79,12 +74,12 @@ public class HospitalService {
 		//Convert the input string to an XML document
 			Document doc = Jsoup.parse(itemData, "", Parser.xmlParser());
 		
-		//Read the value from the element <itemID>
+		//Read the value from the element <hospitalID>
 		String hospitalID = doc.select("hospitalID").text();  
 		
 		 String output = hospitalObj.deleteHospital(hospitalID);  
 		 
 		 return output; 
-		 }
-	
+		 } 
 }
+

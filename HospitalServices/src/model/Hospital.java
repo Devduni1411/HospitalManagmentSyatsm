@@ -6,10 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-
-public class Hospital {
+public class Hospital
+{
 	
-	public Connection connect()
+public Connection connect()
 	{
 		Connection con = null;
 		try
@@ -105,7 +105,6 @@ public String updateHospital(String ID, String no, String name, String address, 
 	}
 	return output;
 }
-
 public String readHospitals()
 	{
 		String output = "";
@@ -150,10 +149,10 @@ public String readHospitals()
 				  
 				  // buttons
 				  output += "<td><input name=\"btnUpdate\" "
-				  + " type=\"button\" value=\"Update\"></td>"  
+				  + " type=\"button\" value=\"Update\" class=\"btn btn-danger\"></td>"  
 						  + "<td><form method=\"post\" action=\"hospitals.jsp\">"
 				  + "<input name=\"btnRemove\" " 
-						  + " type=\"submit\" value=\"Remove\">"
+						  + " type=\"submit\" value=\"Remove\" class=btn btn-danger\">"
 				  + "<input name=\"hospitalID\" type=\"hidden\" "    
 						  + " value=\"" + hospitalID + "\">" + "</form></td></tr>";   
 				  }
@@ -207,5 +206,6 @@ try
    return output; 
 
     }
+	 
 
 }
