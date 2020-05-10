@@ -1,2 +1,2 @@
-# HospitalManagmentSyatem
+# HospitalManagmentSystem
 Paf Project
